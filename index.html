@@ -1,0 +1,85 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+<title>Debug print</title>
+<style>
+* {
+	line-height: 1.2;
+	margin: 0;
+}
+
+html {
+	color: #888;
+	display: table;
+	font-family: sans-serif;
+	height: 100%;
+	text-align: center;
+	width: 100%;
+}
+
+body {
+	display: table-cell;
+	vertical-align: middle;
+	margin: 2em auto;
+}
+
+h1 {
+	color: #555;
+	font-size: 2em;
+	font-weight: 400;
+}
+
+p {
+	margin: 0 auto;
+	width: 280px;
+}
+
+
+
+@media only screen and (max-width: 280px) {
+	body, p {
+		width: 95%;
+	}
+	h1 {
+		font-size: 1.5em;
+		margin: 0 0 0.3em;
+	}
+}
+</style>
+<script>
+var printDebug = function(  ) {
+
+  var xdips = screen.width;
+  $("#xdips").html(xdips);
+  
+  var ydips = screen.height;
+  $("#ydips").html(ydips);
+  
+  var dpr = window.devicePixelRatio;
+  $("#dpr").html(dpr.toFixed(2));
+  
+
+  $("#xres").html(Math.floor(xdips * dpr));
+  $("#yres").html(Math.floor(ydips * dpr));
+  
+
+};
+
+$( window ).resize(printDebug);
+$( window ).ready(printDebug);
+</script>
+</head>
+<body>
+	<section>
+		<h1>Screen Debug</h1>
+		<p>Physical Resolution : <span id="xres"></span> x <span id="yres"></span> Pixels</p>
+		<p>Logical Resolution : <span id="xdips"></span> x <span id="ydips"></span> <span title="device independent pixels">DIPS<span></p>
+		<p>Device Pixel Ratio : <span id="dpr"></span></p>
+	</section>
+
+</body>
+</html>
+<!-- IE needs 512+ bytes: http://blogs.msdn.com/b/ieinternals/archive/2010/08/19/http-error-pages-in-internet-explorer.aspx -->
